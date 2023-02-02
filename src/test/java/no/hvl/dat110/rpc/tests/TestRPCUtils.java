@@ -40,11 +40,15 @@ class TestRPCUtils {
 	void testMarshallString() {
 		
 		String str = "teststring";
+		String str2 = "tests";
 		
 		byte[] encoded = RPCUtils.marshallString(str);
+		byte[] encoded2 = RPCUtils.marshallString(str2);
 		String decoded = RPCUtils.unmarshallString(encoded);
-		
+		String decoded2 = RPCUtils.unmarshallString(encoded2);
+		assertEquals(encoded.length,decoded.length());
 		assertEquals(str,decoded);
+		assertEquals(str2,decoded2);
 	}
 	
 	@Test

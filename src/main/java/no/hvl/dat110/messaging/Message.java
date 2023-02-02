@@ -11,9 +11,10 @@ public class Message {
 	public Message(byte[] data) {
 		
 		// TODO - START
+		if(data != null && data.length < 128) {
+			this.data = data;
+		}
 		
-		if (true)
-			throw new UnsupportedOperationException(TODO.constructor("Message"));
 			
 		// TODO - END
 	}
