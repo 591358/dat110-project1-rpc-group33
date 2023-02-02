@@ -1,9 +1,11 @@
 package no.hvl.dat110.rpc;
 
+import java.io.IOException;
 import java.util.HashMap;
 
 import no.hvl.dat110.TODO;
 import no.hvl.dat110.messaging.MessageConnection;
+import no.hvl.dat110.messaging.MessageUtils;
 import no.hvl.dat110.messaging.Message;
 import no.hvl.dat110.messaging.MessagingServer;
 
@@ -23,7 +25,7 @@ public class RPCServer {
 		
 	}
 	
-	public void run() {
+	public void run() throws IOException {
 		
 		// the stop RPC method is built into the server
 		RPCRemoteImpl rpcstop = new RPCServerStopImpl(RPCCommon.RPIDSTOP,this);
@@ -47,10 +49,18 @@ public class RPCServer {
 		   // - lookup the method to be invoked
 		   // - invoke the method
 		   // - send back the message containing RPC reply
-			
-		   if (true)
-				throw new UnsupportedOperationException(TODO.method());
+		   requestmsg = connection.receive();
 		   
+		   byte[] requestdata = requestmsg.getData();
+		   rpcid = requestdata[0];
+		   requestdata = RPCUtils.decapsulate(requestdata);
+		   
+		   RPCRemoteImpl imp = services.get(rpcid);
+		 
+		   byte[] responsedata = new byte[127];
+		   responsedata = imp.invoke(requestdata);
+		   replymsg = new Message(RPCUtils.encapsulate(rpcid, responsedata));
+		   connection.send(replymsg);
 		   // TODO - END
 
 			// stop the server if it was stop methods that was called

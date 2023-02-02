@@ -1,7 +1,9 @@
 package no.hvl.dat110.messaging.tests;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 
 // import org.junit.Test;
@@ -40,6 +42,8 @@ class TestMessage {
 		for (int i = 0; i<data.length;i++) {
 			assertEquals(data[i],encoded[i+1]);
 		}
+		
+
 	}
 		
 	@Test
