@@ -41,7 +41,7 @@ public class RPCServer {
 		while (!stop) {
 	    
 		   byte rpcid = 0;
-		   Message requestmsg, replymsg;
+		   Message requestmsg =null, replymsg;
 		   
 		   // TODO - START
 		   // - receive a Message containing an RPC request

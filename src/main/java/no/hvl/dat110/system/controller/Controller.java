@@ -10,7 +10,7 @@ public class Controller  {
 	
 	private static int N = 5;
 	
-	public static void main (String[] args) throws IOException {
+	public static void main (String[] args) throws IOException, InterruptedException {
 		
 		DisplayStub display;
 		SensorStub sensor;
@@ -39,6 +39,8 @@ public class Controller  {
 		sensor = new SensorStub(sensorclient);
 		
 		for(int i = 0; i<N;i++) {
+			
+			Thread.sleep(1000);
 			display.write("" + sensor.read());
 		}
 		
